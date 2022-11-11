@@ -1,7 +1,7 @@
 pipeline{
     agent any
      tools {
-        maven 'Maven-3.6.1'
+        maven 'maven-3.8.1'
     }
     
     environment{
@@ -13,7 +13,7 @@ pipeline{
                 git credentialsId: 'javahome2', url: 'https://github.com/harishsavitri/myweb.git'
             }
         }
-        stage("Maven Build"){
+        stage('maven-build'){
             steps{
                 sh "mvn clean sonar:sonar package"
                 
