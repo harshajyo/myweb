@@ -5,12 +5,12 @@ pipeline{
     }
     
     environment{
-        PATH = "/opt/maven3/bin:$PATH"
+        PATH = "/opt/maven/bin:$PATH"
     }
     stages{
         stage("Git Checkout"){
             steps{
-                git credentialsId: 'javahome2', url: 'https://github.com/srinivas1987devops/myweb.git'
+                git credentialsId: 'javahome2', url: 'https://github.com/harishsavitri/myweb.git'
             }
         }
         stage("Maven Build"){
@@ -29,10 +29,10 @@ pipeline{
                             type: 'war'
                        ]
                   ], 
-                  credentialsId: 'nexus3', 
+                  credentialsId: 'nexus', 
                   groupId: 'in.javahome', 
-                  nexusUrl: '172.31.40.8:8081', 
-                  nexusVersion: 'nexus3', 
+                  nexusUrl: '44.212.18.184:8081', 
+                  nexusVersion: 'nexus', 
                   protocol: 'http', 
                   repository: 'sample-releases', 
                   version: '8.2.0'  
@@ -42,11 +42,11 @@ pipeline{
             steps{
                 sshagent(['tomcat-new']) {
                 sh """
-                    scp -o StrictHostKeyChecking=no target/myweb-8.2.0.war  ec2-user@172.31.41.172:/home/ec2-user/apache-tomcat-9.0.64/webapps/
+                    scp -o StrictHostKeyChecking=no target/myweb-8.2.0.war  ec2-user@34.230.61.226: /opt/tom143/bin/webapps/
                     
-                    ssh ec2-user@172.31.41.172 /home/ec2-user/apache-tomcat-9.0.64/bin/shutdown.sh
+                    ssh ec2-user@34.230.61.226 /opt/tom143/bin/shutdown.sh
                     
-                    ssh ec2-user@172.31.41.172 /home/ec2-user/apache-tomcat-9.0.64/bin/startup.sh
+                    ssh ec2-user@34.230.61.226 /opt/tom143/bin/startup.sh
                 
                 """
             }
