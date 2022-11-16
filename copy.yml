@@ -1,7 +1,7 @@
 ---
- - hosts: webservers
+ - hosts: 172.31.26.95
    tasks:
      - name: copy the file from local to remote
        copy:
          src: target/myweb-8.2.0.war
-         dest: /usr/local/apache-tomcat-9.0.64/webapps/
+         dest: /opt/tom143/webapps/
